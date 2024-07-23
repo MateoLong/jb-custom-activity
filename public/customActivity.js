@@ -1,31 +1,15 @@
 define(['postmonger'], function(Postmonger) {
     const connection = new Postmonger.Session();
 
-    let activity = null;
+    connection.trigger('ready');
 
-    function init() {
-        document.addEventListener('DOMContentLoaded', main);
-    }
+    connection.on('initActivity', function( data ) {
+        console.log('test: ', data);
+    })
 
-    function main() {
-        connection.on('initActivity', onInitActivity);
-        connection.trigger('ready');
-    }
+    connection.on('clickedNext', function(  ) {
+        console.log('test');
+    })
 
-    function onInitActivity(payload) {
-        activity = payload;
 
-        const hasInArguments = Boolean(
-            activity.arguments &&
-            activity.arguments.execute &&
-            activity.arguments.execute.inArguments &&
-            activity.arguments.execute.inArguments.length > 0
-        );
-
-        const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
-    }
-
-    return {
-        init: init
-    };
 });
