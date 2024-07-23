@@ -3,7 +3,7 @@
     "name": "Custom Activity Name",
     "description": "Custom Activity Description",
     "metaData": {
-      "icon": "images/icon.svg",
+      "icon": "images/icon.png",
       "category": "Custom"
     },
     "type": "REST",
@@ -30,7 +30,7 @@
     },
     "configurationArguments": {      
       "publish": {
-        "url": "https://example.com/publish"
+        "url": "https://job-custom-act.onrender.com/publish"
       }
     },
     "schema": {
