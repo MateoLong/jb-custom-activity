@@ -12,7 +12,6 @@ const connection = new Postmonger.Session();
 // we'll store the activity on this variable when we receive it
 let activity = null;
 
-
 // Wait for the document to load before we doing anything
 document.addEventListener('DOMContentLoaded', function main() {
 
