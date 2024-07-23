@@ -4,7 +4,8 @@
     "description": "Custom Activity Description",
     "metaData": {
       "icon": "images/icon.png",
-      "category": "message"
+      "category": "message",
+      "isConfigured": true
     },
     "type": "REST",
     "lang": {

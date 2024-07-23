@@ -26,21 +26,6 @@ define(['postmonger'], function(Postmonger) {
         const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
     }
 
-    function onDoneButtonClick() {
-        activity.metaData.isConfigured = true;
-        connection.trigger('updateActivity', activity);
-    }
-
-    function onCancelButtonClick() {
-        connection.trigger('setActivityDirtyState', false);
-        connection.trigger('requestInspectorClose');
-    }
-
-    function setupEventHandlers() {
-        document.getElementById('done').addEventListener('click', onDoneButtonClick);
-        document.getElementById('cancel').addEventListener('click', onCancelButtonClick);
-    }
-
     return {
         init: init
     };
