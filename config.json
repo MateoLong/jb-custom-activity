@@ -1,0 +1,60 @@
+{
+    "workflowApiVersion": "1.1",
+    "name": "Custom Activity Name",
+    "description": "Custom Activity Description",
+    "metaData": {
+      "icon": "images/icon.svg",
+      "category": "Custom"
+    },
+    "type": "REST",
+    "lang": {
+      "en-US": {
+        "name": "Localized Custom Activity Name",
+        "description": "Localized Custom Activity Description"
+      }
+    },
+    "arguments": {
+      "execute": {
+        "inArguments": [
+          {
+            "staticValue": 0
+          }
+        ],
+        "outArguments": [
+          {
+            "returnValue": "default"
+          }
+        ],
+        "url": "https://job-custom-act.onrender.com/execute"
+      }
+    },
+    "configurationArguments": {      
+      "publish": {
+        "url": "https://example.com/publish"
+      }
+    },
+    "schema": {
+      "arguments": {
+        "execute": {
+          "inArguments": [
+            {
+              "staticValue": {
+                "dataType": "Number",
+                "isNullable": false,
+                "direction": "in"
+              }
+            }
+          ],
+          "outArguments": [
+            {
+              "returnValue": {
+                "dataType": "Text",
+                "isNullable": false,
+                "direction": "out"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
