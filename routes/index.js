@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.post('/execute', async function(req, res, next) {
   var inArguments = req.body.inArguments;
   console.log('req.body.inArguments: ' + req.body.inArguments);
-  var msg = req.body.inArguments.name + ' ' + req.body.inArguments.lastName;  
+  var msg = req.body.inArguments.staticValue;  
   res.status(200).json({ "error": false, "message": msg, "data": null});  
 });
 
