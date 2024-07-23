@@ -47,50 +47,12 @@ function onInitActivity(payload) {
     );
 
     const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
-
-    console.log('-------- triggered:onInitActivity({obj}) --------');
-    console.log('activity:\n ', JSON.stringify(activity, null, 4));
-    console.log('Has In Arguments: ', hasInArguments);
-    console.log('inArguments', inArguments);
-    console.log('-------------------------------------------------');
-
-    // check if this activity has an incoming argument.
-    // this would be set on the server side when the activity executes
-    // (take a look at execute() in ./discountCode/app.js to see where that happens)
-    const discountArgument = inArguments.find((arg) => arg.discount);
-
-    console.log('Discount Argument', discountArgument);
-
-    // if a discountCode back argument was set, show the message in the view.
-    if (discountArgument) {
-        selectDiscountCodeOption(discountArgument.discount);
-    }
-
-    // if the discountCode back argument doesn't exist the user can pick
-    // a discountCode message from the drop down list. the discountCode back arg
-    // will be set once the journey executes the activity
 }
 
 function onDoneButtonClick() {
     // we set must metaData.isConfigured in order to tell JB that
     // this activity is ready for activation
     activity.metaData.isConfigured = true;
-
-    // get the option that the user selected and save it to
-    const select = document.getElementById('discount-code');
-    const option = select.options[select.selectedIndex];
-
-    activity.arguments.execute.inArguments = [{
-        discount: option.value,
-    }];
-
-    // you can set the name that appears below the activity with the name property
-    activity.name = `Issue ${activity.arguments.execute.inArguments[0].discount}% Code`;
-
-    console.log('------------ triggering:updateActivity({obj}) ----------------');
-    console.log('Sending message back to updateActivity');
-    console.log('saving\n', JSON.stringify(activity, null, 4));
-    console.log('--------------------------------------------------------------');
 
     connection.trigger('updateActivity', activity);
 }
@@ -104,36 +66,9 @@ function onCancelButtonClick() {
     connection.trigger('requestInspectorClose');
 }
 
-function onDiscountCodeSelectChange() {
-    // enable or disable the done button when the select option changes
-    const select = document.getElementById('discount-code');
-
-    if (select.selectedIndex) {
-        document.getElementById('done').removeAttribute('disabled');
-    } else {
-        document.getElementById('done').setAttribute('disabled', '');
-    }
-
-    // let journey builder know the activity has changes
-    connection.trigger('setActivityDirtyState', true);
-}
-
-function selectDiscountCodeOption(value) {
-    const select = document.getElementById('discount-code');
-    const selectOption = select.querySelector(`[value='${value}']`);
-
-    if (selectOption) {
-        selectOption.selected = true;
-        onDiscountCodeSelectChange();
-    } else {
-        console.log('Could not select value from list', `[value='${value}]'`);
-    }
-}
-
 function setupEventHandlers() {
     // Listen to events on the form
     document.getElementById('done').addEventListener('click', onDoneButtonClick);
     document.getElementById('cancel').addEventListener('click', onCancelButtonClick);
-    document.getElementById('discount-code').addEventListener('change', onDiscountCodeSelectChange);
 }
 
