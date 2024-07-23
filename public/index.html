@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Activity</title>
+    <script src="js/require.js"></script>
+    <script>
+        require.config({
+            paths: {
+                'postmonger': 'js/postmonger'
+            }
+        });
+        require(['customActivity'], function(customActivity) {
+            customActivity.init();
+        });
+    </script>
 </head>
 <body>
     <h1>Bienvenido a la CA</h1>
-
-    <script src="js/postmonger.js"></script>
-    <script src="js/require.js"></script>
-    <script src="customActivity.js"></script>
     
 </body>
 </html>
