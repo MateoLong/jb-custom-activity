@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Activity</title>
+    <link rel="stylesheet" href="node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css">
     <script src="js/require.js"></script>
     <script>
         require.config({
@@ -16,8 +17,19 @@
         });
     </script>
 </head>
-<body>
-    <h1>Bienvenido a la CA</h1>
-    
+<body class="slds-scope">
+    <div class="slds-box slds-theme_default">
+        <h1 class="slds-text-heading_large">Bienvenido a la CA</h1>
+        
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="input-text-id-1">Enter Text</label>
+            <div class="slds-form-element__control">
+                <input type="text" id="input-text-id-1" class="slds-input" placeholder="Enter some text"/>
+            </div>
+        </div>
+
+        <button id="done" class="slds-button slds-button_brand">Done</button>
+        <button id="cancel" class="slds-button slds-button_neutral">Cancel</button>
+    </div>
 </body>
 </html>

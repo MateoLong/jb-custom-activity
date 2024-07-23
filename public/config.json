@@ -9,8 +9,8 @@
     "type": "REST",
     "lang": {
       "en-US": {
-        "name": "Localized Custom Activity Name",
-        "description": "Localized Custom Activity Description"
+        "name": "Primer Test Custom Activity",
+        "description": "Primer test de custom activity"
       }
     },
     "arguments": {
