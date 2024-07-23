@@ -8,7 +8,6 @@ define(['postmonger'], function(Postmonger) {
     }
 
     function main() {
-        setupEventHandlers();
         connection.on('initActivity', onInitActivity);
         connection.trigger('ready');
     }
