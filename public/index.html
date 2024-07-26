@@ -22,11 +22,114 @@
         <h1 class="slds-text-heading_large">Bienvenido a la CA</h1>
         
         <div class="slds-form-element">
-            <label class="slds-form-element__label" for="input-text-id-1">Enter Data</label>
+            <label class="slds-form-element__label" for="clientId">Enter Client Id</label>
             <div class="slds-form-element__control">
-                <input type="text" id="input-text-id-1" class="slds-input" placeholder=""/>
+                <input type="text" id="clientId" class="slds-input" placeholder=""/>
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="clientSecret">Enter Client Secret</label>
+            <div class="slds-form-element__control">
+                <input type="text" id="clientSecret" class="slds-input" placeholder=""/>
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <label for="environment">Environment</label>
+            <select id="environment" class="form-control">
+            <option value="sandbox" selected="selected">Sandbox</option>
+            <option value="production">Production</option>
+            </select>
+        </div>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="redirectUri">Enter Redirect URI</label>
+            <div class="slds-form-element__control">
+                <input type="text" id="redirectUri" class="slds-input" placeholder=""/>
             </div>
         </div>
     </div>
+<!-- 
+    <script type="text/javascript">
+        (function() {
+    
+            function authorizeUri() {
+    
+                // Generate the authUri
+                var jsonBody = {};
+                jsonBody.clientId = $('#clientId').val();
+                jsonBody.clientSecret = $('#clientSecret').val();
+                jsonBody.environment = $('#environment').val();
+                jsonBody.redirectUri = $('#redirectUri').val();
+    
+                $.get('/authUri', {json:jsonBody}, function (uri) {
+                    console.log('The Auth Uris is :'+uri);
+                })
+                .then(function (authUri) {
+                    // Launch Popup using the JS window Object
+                    var parameters = "location=1,width=800,height=650";
+                    parameters += ",left=" + (screen.width - 800) / 2 + ",top=" + (screen.height - 650) / 2;
+                    var win = window.open(authUri, 'connectPopup', parameters);
+                    var pollOAuth = window.setInterval(function () {
+                        try {
+                            if (win.document.URL.indexOf("code") != -1) {
+                                window.clearInterval(pollOAuth);
+                                win.close();
+                                location.reload();
+                            }
+                        } catch (e) {
+                            console.log(e)
+                        }
+                    }, 100);
+                });
+            }
+    
+            function retrieveToken() {
+    
+                // Generate the authUri
+                $.get('/retrieveToken', function (token) {
+                    var token = (token!=null) ? token : 'Please Authorize Using Connect to Quickbooks first !';
+                    $("#accessToken").html(token);
+                });
+            }
+    
+            function refreshToken() {
+    
+                // Generate the authUri
+                $.get('/refreshAccessToken', function (token) {
+                    var token = (token!=null) ? token : 'Please Authorize Using Connect to Quickbooks first !';
+                    $("#accessToken").html(token);
+                });
+            }
+    
+            function makeAPICall() {
+    
+                // Generate the authUri
+                $.get('/getCompanyInfo', function (response) {
+                    $("#apiCall").html(JSON.stringify(response, null, 4));
+                });
+            }
+    
+            document.getElementById('authorizeUri').addEventListener('click', function response(e) {
+                e.preventDefault();
+                authorizeUri();
+            });
+    
+            document.getElementById('retrieveToken').addEventListener('click', function response(e) {
+                e.preventDefault();
+                retrieveToken();
+            });
+    
+            document.getElementById('refreshToken').addEventListener('click', function response(e) {
+                e.preventDefault();
+                refreshToken();
+            });
+    
+            document.getElementById('makeAPICall').addEventListener('click', function response(e) {
+                e.preventDefault();
+                makeAPICall();
+            });
+    
+        })();
+    </script> -->
+
 </body>
 </html>

@@ -1,3 +1,5 @@
+require('dotenv').config(); // load env variables from .env file
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
