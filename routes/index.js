@@ -37,20 +37,6 @@ router.get('/callback', function(req, res) {
   });
 });
 
-// Refresh the access-token
-app.get('/refreshAccessToken', function (req, res) {
-  oauthClient
-    .refresh()
-    .then(function (authResponse) {
-      console.log(`\n The Refresh Token is  ${JSON.stringify(authResponse.json)}`);
-      oauth2_token_json = JSON.stringify(authResponse.json, null, 2);
-      res.send(oauth2_token_json);
-    })
-    .catch(function (e) {
-      console.error(e);
-    });
-});
-
 /* POST to execute */
 router.post('/execute', async function(req, res, next) {
   var inArguments = req.body.inArguments;
