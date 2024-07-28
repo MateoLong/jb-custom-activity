@@ -1,9 +1,9 @@
-const { json } = require("express");
-
 define(['postmonger'], function(Postmonger) {
     const connection = new Postmonger.Session();
 
-    connection.trigger('ready');
+    const init = function() {
+        connection.trigger('ready');
+    }
 
     connection.on('initActivity', function( data ) {
         console.log('test: ', data);
@@ -42,5 +42,7 @@ define(['postmonger'], function(Postmonger) {
 
     })
 
-
+    return {
+        init: init
+    };
 });
