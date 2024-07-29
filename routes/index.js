@@ -1,26 +1,46 @@
 var express = require('express');
 var router = express.Router();
 var OAuthClient = require('intuit-oauth');
+var bodyParser = require('body-parser');
+
+router.use(bodyParser.urlencoded({ extended: true }));
 
 let oauth2_token_json = null;
 let redirectUri = '';
 let oauthClient = null;
 
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 // Endpoint to start the OAuth flow
-router.post('/authUri', (req, res) => {
+// router.post('/authUri', (req, res) => {
+//   oauthClient = new OAuthClient({
+//       clientId: req.body.clientId,
+//       clientSecret: req.body.clientSecret,
+//       environment: req.body.environment,
+//       redirectUri: req.body.redirectUri
+//   });
+
+//   const authUri = oauthClient.authorizeUri({
+//       scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
+//       state: 'testState',
+//   });
+
+//   res.json({ authUri }); // Send the authorization URL back to the frontend
+// });
+
+router.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
-      clientId: req.body.clientId,
-      clientSecret: req.body.clientSecret,
-      environment: req.body.environment,
-      redirectUri: req.body.redirectUri
+    clientId: req.query.json.clientId,
+    clientSecret: req.query.json.clientSecret,
+    environment: req.query.json.environment,
+    redirectUri: req.query.json.redirectUri,
   });
 
   const authUri = oauthClient.authorizeUri({
-      scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
-      state: 'testState',
+    scope: [OAuthClient.scopes.Accounting],
+    state: 'intuit-test',
   });
-
-  res.json({ authUri }); // Send the authorization URL back to the frontend
+  res.send(authUri);
 });
 
 // Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
