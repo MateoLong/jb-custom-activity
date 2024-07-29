@@ -8,9 +8,7 @@ define(['postmonger'], function(Postmonger) {
 
     connection.on('initActivity', function(data) {
         console.log('initActivity data: ', JSON.stringify(data));
-        if (data) {
-            payload = data;
-        }
+        payload = data;
         // Initialize any data or state here if necessary
     });
 
