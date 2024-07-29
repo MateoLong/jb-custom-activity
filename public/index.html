@@ -100,7 +100,7 @@
                     });
                 }
 
-                function makeAPICall() {
+                function createCustomer() {
 
                     // Generate the authUri
                     $.get('/createCustomer', function (response) {
@@ -121,7 +121,7 @@
 
                 document.getElementById('apiCallCreateCustomer').addEventListener('click', function response(e) {
                     e.preventDefault();
-                    getCustomerInfo();
+                    createCustomer();
                 });
             })();
         </script>
