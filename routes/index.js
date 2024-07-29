@@ -29,7 +29,7 @@ router.get('/callback', function(req, res) {
   oauthClient
   .createToken(req.url)
   .then(function(authResponse) {
-      console.log('The Token is:', JSON.stringify(authResponse.getJson()));
+      console.log('The Token is:', JSON.stringify(authResponse.json));
       // Store the tokens securely
       oauth2_token_json = JSON.stringify(authResponse.json, null, 2);
       res.send('Token acquired and stored');
