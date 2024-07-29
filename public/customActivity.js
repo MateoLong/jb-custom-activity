@@ -14,7 +14,12 @@ define(['postmonger'], function(Postmonger) {
         // Initialize any data or state here if necessary
     });
 
-    connection.on('clickedNext', function(data) {
+    connection.on('clickedNext', function() {
+
+        console.log('payload: ' + JSON.stringify(payload));
+        payload['metaData'].isConfigured = true;
+        connection.trigger('updateActivity', payload);
+        
         //    // Collect form values
         //    const clientId = document.getElementById('clientId').value;
         //    const clientSecret = document.getElementById('clientSecret').value;
@@ -44,11 +49,6 @@ define(['postmonger'], function(Postmonger) {
         //     }).fail(function(error) {
         //         console.error('Error initiating OAuth:', error);
         //     });
-
-        console.log('payload: ' + JSON.stringify(payload));
-        payload['metaData'].isConfigured = true;
-
-        connection.trigger('updateActivity', payload);
     });
 
     return {
