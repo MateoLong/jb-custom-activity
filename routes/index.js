@@ -119,6 +119,7 @@ oauthClient
   })
   .then(function (response) {
     console.log('The API response is  : ' + response);
+    res.json(response);
   })
   .catch(function (e) {
     console.log('The error is ' + JSON.stringify(e));
