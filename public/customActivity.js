@@ -1,5 +1,6 @@
 define(['postmonger'], function(Postmonger) {
     const connection = new Postmonger.Session();
+    var payload = {};
 
     const init = function() {
         connection.trigger('ready');
@@ -7,6 +8,9 @@ define(['postmonger'], function(Postmonger) {
 
     connection.on('initActivity', function(data) {
         console.log('initActivity data: ', data);
+        if (data) {
+            payload = data;
+        }
         // Initialize any data or state here if necessary
     });
 
@@ -42,9 +46,9 @@ define(['postmonger'], function(Postmonger) {
         //     });
 
         console.log('payload: ' + data);
-        // payload['metaData'].isConfigured = true;
+        payload['metaData'].isConfigured = true;
 
-        // connection.trigger('updateActivity', payload);
+        connection.trigger('updateActivity', payload);
     });
 
     return {
