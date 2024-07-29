@@ -45,7 +45,7 @@ define(['postmonger'], function(Postmonger) {
         //         console.error('Error initiating OAuth:', error);
         //     });
 
-        console.log('payload: ' + data);
+        console.log('payload: ' + payload);
         payload['metaData'].isConfigured = true;
 
         connection.trigger('updateActivity', payload);
