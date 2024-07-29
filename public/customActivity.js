@@ -1,6 +1,6 @@
 define(['postmonger'], function(Postmonger) {
     const connection = new Postmonger.Session();
-    var payload = {};
+    let payload = {};
 
     const init = function() {
         connection.trigger('ready');
