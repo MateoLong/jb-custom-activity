@@ -7,7 +7,7 @@ let redirectUri = '';
 let oauthClient = null;
 
 // Endpoint to start the OAuth flow
-app.post('/authUri', (req, res) => {
+router.post('/authUri', (req, res) => {
   oauthClient = new OAuthClient({
       clientId: req.body.clientId,
       clientSecret: req.body.clientSecret,
