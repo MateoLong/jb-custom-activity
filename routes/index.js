@@ -36,7 +36,7 @@ router.get('/callback', function(req, res) {
   .catch(function(e) {
       console.error('The error message is:', e.originalMessage);
       console.error(e.intuit_tid);
-      res.send('Failed to acquire token');
+      res.send('Failed to acquire token: ' + e.originalMessage + ' ' + e.intuit_tid);
   });
 });
 
