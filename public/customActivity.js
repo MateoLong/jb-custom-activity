@@ -3,44 +3,31 @@ define(['postmonger'], function(Postmonger) {
 
     const init = function() {
         connection.trigger('ready');
-    }
+    };
 
-    connection.on('initActivity', function( data ) {
-        console.log('test: ', data);
-    })
+    connection.on('initActivity', function(data) {
+        console.log('initActivity data: ', data);
+        // Initialize any data or state here if necessary
+    });
 
-    connection.on('clickedNext', function( data ) {
-        // // Generate the authUri
-        var jsonBody = {};
-        jsonBody.clientId = document.getElementById( 'clientId' ).value;        
-        jsonBody.clientSecret = document.getElementById( 'clientSecret' ).value;        
-        jsonBody.environment = document.getElementById( 'environment' ).value;        
-        jsonBody.redirectUri = document.getElementById( 'redirectUri' ).value;      
-        
-        console.log('test clicked next data: ' + jsonBody);
-        
-        $.get('/authUri', {json:jsonBody}, function (uri) {
-            console.log('The Auth Uris is :'+uri);
-        })
-        .then(function (authUri) {
-            // Launch Popup using the JS window Object
-            var parameters = "location=1,width=800,height=650";
-            parameters += ",left=" + (screen.width - 800) / 2 + ",top=" + (screen.height - 650) / 2;
-            var win = window.open(authUri, 'connectPopup', parameters);
-            var pollOAuth = window.setInterval(function () {
-                try {
-                    if (win.document.URL.indexOf("code") != -1) {
-                        window.clearInterval(pollOAuth);
-                        win.close();
-                        location.reload();
-                    }
-                } catch (e) {
-                    console.log(e)
-                }
-            }, 100);
+    connection.on('clickedNext', function(data) {
+        // Collect form values
+        const jsonBody = {
+            clientId: document.getElementById('clientId').value,
+            clientSecret: document.getElementById('clientSecret').value,
+            environment: document.getElementById('environment').value,
+            redirectUri: document.getElementById('redirectUri').value
+        };
+
+        console.log('clickedNext jsonBody: ', jsonBody);
+
+        // Request the authorization URI from the backend and redirect
+        $.get('/authUri', jsonBody, function(response) {
+            // This will redirect the user to the QuickBooks authorization URL
+        }).fail(function(error) {
+            console.error('Error fetching auth URI:', error);
         });
-
-    })
+    });
 
     return {
         init: init

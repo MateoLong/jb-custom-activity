@@ -1,53 +1,78 @@
-var express = require('express');
-var router = express.Router();
-var OAuthClient = require('intuit-oauth');
+// Backend (Node.js and Express.js)
 
-const oauthClient = new OAuthClient({
-  clientId: process.env.QUICKBOOKS_CLIENT_ID,
-  clientSecret: process.env.QUICKBOOKS_CLIENT_SECRET,
-  environment: 'sandbox',
-  redirectUri: process.env.QUICKBOOKS_REDIRECT_URI
+const express = require('express');
+const OAuthClient = require('intuit-oauth');
+const bodyParser = require('body-parser');
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+let oauthClient = new OAuthClient({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    environment: 'sandbox', // or 'production'
+    redirectUri: process.env.REDIRECT_URI,
 });
 
-let oauth2_token_json = null;
-let redirectUri = '';
+let refresh_token = 'stored_refresh_token'; // Retrieve the stored refresh token from your database or config
 
-// Endpoint to start the OAuth flow
-router.get('/authUri', function(req, res) {
-  var authUri = oauthClient.authorizeUri({
-      scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
-      state: 'testState'
-  });
-  res.redirect(authUri);
+// Route to get the authorization URI
+app.get('/authUri', (req, res) => {
+    oauthClient = new OAuthClient({
+        clientId: req.query.clientId,
+        clientSecret: req.query.clientSecret,
+        environment: req.query.environment,
+        redirectUri: req.query.redirectUri,
+    });
+
+    const authUri = oauthClient.authorizeUri({
+        scope: [OAuthClient.scopes.Accounting],
+        state: 'intuit-test',
+    });
+    res.redirect(authUri); // Redirect the client to the QuickBooks authorization URL
 });
 
-// Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
-router.get('/callback', function(req, res) {
-  oauthClient
-  .createToken(req.url)
-  .then(function(authResponse) {
-      console.log('The Token is:', JSON.stringify(authResponse.getJson()));      
-      oauth2_token_json = JSON.stringify(authResponse.json, null, 2);
-      res.send('Token acquired and stored');
-  })
-  .catch(function(e) {
-      console.error('The error message is:', e.originalMessage);
-      console.error(e.intuit_tid);
-      res.send('Failed to acquire token');
-  });
+// Callback route to handle the authorization response
+app.get('/callback', (req, res) => {
+    oauthClient.createToken(req.url)
+        .then(authResponse => {
+            refresh_token = authResponse.getJson().refresh_token;
+            // Store the refresh token securely
+            res.send('Authorization successful');
+        })
+        .catch(e => {
+            console.error(e);
+            res.send('Authorization failed');
+        });
 });
 
-/* POST to execute */
-router.post('/execute', async function(req, res, next) {
-  var inArguments = req.body.inArguments;
-  console.log('req.body.inArguments: ' + req.body.inArguments);
-  var msg = req.body.inArguments.staticValue;  
-  res.status(200).json({ "error": false, "message": msg, "data": null});  
+// Route to get company info using the refresh token
+app.get('/getCompanyInfo', (req, res) => {
+    oauthClient.refreshUsingToken(refresh_token)
+        .then(authResponse => {
+            const accessToken = authResponse.getJson().access_token;
+            const companyID = authResponse.getJson().realmId;
+
+            const url = oauthClient.environment === 'sandbox' 
+                ? OAuthClient.environment.sandbox 
+                : OAuthClient.environment.production;
+
+            oauthClient.makeApiCall({ url: `${url}v3/company/${companyID}/companyinfo/${companyID}`, headers: { Authorization: `Bearer ${accessToken}` } })
+                .then(apiResponse => {
+                    res.json(apiResponse.getJson());
+                })
+                .catch(e => {
+                    console.error(e);
+                    res.status(500).send('API call failed');
+                });
+        })
+        .catch(e => {
+            console.error(e);
+            res.status(500).send('Token refresh failed');
+        });
 });
 
-/* POST to publish */
-router.post('/publish', async function(req, res, next) {
-  res.status(200).json({ "error": false, "message": "publish success", "data": null});  
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
 });
-
-module.exports = router;
