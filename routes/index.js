@@ -1,8 +1,8 @@
-// Backend (Node.js and Express.js)
-
 const express = require('express');
-const OAuthClient = require('intuit-oauth');
 const bodyParser = require('body-parser');
+const OAuthClient = require('intuit-oauth');
+require('dotenv').config();
+
 const app = express();
 
 app.use(bodyParser.json());
