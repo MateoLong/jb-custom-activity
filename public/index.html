@@ -103,7 +103,7 @@
                 function createCustomer() {
 
                     // Generate the authUri
-                    $.get('/createCustomer', function (response) {
+                    $.post('/createCustomer', function (response) {
                         $("#createCustomer").html(JSON.stringify(response, null, 4));
                     });
                 }
