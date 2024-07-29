@@ -50,6 +50,7 @@ router.get('/callback', function(req, res) {
   .then(function(authResponse) {      
       // Store the tokens securely
       oauth2_token_json = JSON.stringify(authResponse.json, null, 2);
+      console.log('token aquired and stored');
       res.send('Token acquired and stored');
   })
   .catch(function(e) {
