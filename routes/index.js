@@ -79,7 +79,7 @@ router.get('/getCompanyInfo', function (req, res) {
     });
 });
 
-router.post('/createCustomer', function (req, res) {
+router.post('/createCustomer', function (req, res, next) {
   console.log('entra al createCustomer');
   const companyID = oauthClient.getToken().realmId;
 

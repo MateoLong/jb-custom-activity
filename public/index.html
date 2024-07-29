@@ -100,7 +100,7 @@
                 }
 
                 function createCustomer() {
-
+                    console.log('createCustomer() en script');
                     $.post('/createCustomer', function (response) {
                         $("#createCustomer").html(JSON.stringify(response, null, 4));
                     }).fail(function(error) {
