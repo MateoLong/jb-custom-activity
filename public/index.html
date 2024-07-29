@@ -52,8 +52,10 @@
                     <button  type="button" id="authorizeUri" class="slds-button slds-button_brand">Connect to QB</button>
                 </div>
             </div>
-            <pre id="apiCall"></pre>
-            <button  type="button" id="makeAPICall" class="slds-button slds-button_brand">Get Company Info</button>
+            <pre id="getCompanyInfo"></pre>
+            <button  type="button" id="apiCallCompanyInfo" class="slds-button slds-button_brand">Get Company Info</button>
+            <pre id="createCustomer"></pre>
+            <button  type="button" id="apiCallCreateCustomer" class="slds-button slds-button_brand">Get Company Info</button>
         </div>
         <script type="text/javascript">
             (function() {
@@ -90,11 +92,19 @@
                     });
                 }
 
-                function makeAPICall() {
+                function getCustomerInfo() {
 
                     // Generate the authUri
                     $.get('/getCompanyInfo', function (response) {
-                        $("#apiCall").html(JSON.stringify(response, null, 4));
+                        $("#getCompanyInfo").html(JSON.stringify(response, null, 4));
+                    });
+                }
+
+                function makeAPICall() {
+
+                    // Generate the authUri
+                    $.get('/createCustomer', function (response) {
+                        $("#createCustomer").html(JSON.stringify(response, null, 4));
                     });
                 }
 
@@ -104,9 +114,14 @@
                 });
 
 
-                document.getElementById('makeAPICall').addEventListener('click', function response(e) {
+                document.getElementById('apiCallCompanyInfo').addEventListener('click', function response(e) {
                     e.preventDefault();
-                    makeAPICall();
+                    getCustomerInfo();
+                });
+
+                document.getElementById('apiCallCreateCustomer').addEventListener('click', function response(e) {
+                    e.preventDefault();
+                    getCustomerInfo();
                 });
             })();
         </script>

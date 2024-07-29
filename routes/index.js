@@ -79,6 +79,52 @@ router.get('/getCompanyInfo', function (req, res) {
     });
 });
 
+router.post('/createCustomer', function (req, res) {
+  const companyID = oauthClient.getToken().realmId;
+
+  const url =
+    oauthClient.environment == 'sandbox'
+      ? OAuthClient.environment.sandbox
+      : OAuthClient.environment.production;
+
+  // Body sample from API explorer examples
+  const body = {
+  TrackQtyOnHand: true,
+  Name: 'Garden Supplies',
+  QtyOnHand: 10,
+  InvStartDate: '2015-01-01',
+  Type: 'Inventory',
+  IncomeAccountRef: {
+    name: 'Sales of Product Income',
+    value: '79',
+  },
+  AssetAccountRef: {
+    name: 'Inventory Asset',
+    value: '81',
+  },
+  ExpenseAccountRef: {
+    name: 'Cost of Goods Sold',
+    value: '80',
+  },
+};
+
+oauthClient
+  .makeApiCall({
+    url: `${url}v3/company/${companyID}/customer?minorversion=73`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+  .then(function (response) {
+    console.log('The API response is  : ' + response);
+  })
+  .catch(function (e) {
+    console.log('The error is ' + JSON.stringify(e));
+  });
+});
+
 /* POST to execute */
 router.post('/execute', async function(req, res, next) {
   var inArguments = req.body.inArguments;
