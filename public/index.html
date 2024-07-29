@@ -67,7 +67,7 @@
                 
     
                 $.get('/authUri', {json:jsonBody}, function (uri) {
-                    console.log('jsonBody: ' + jsonBody);
+                    console.log('jsonBody: ' +  JSON.stringify(jsonBody));
                     console.log('The Auth Uris is :'+uri);
                 })
                 .then(function (authUri) {
