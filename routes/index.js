@@ -25,11 +25,9 @@ router.post('/authUri', (req, res) => {
 
 // Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
 router.get('/callback', function(req, res) {
-  console.log('/callback: ' + req);
   oauthClient
   .createToken(req.url)
-  .then(function(authResponse) {
-      console.log('The Token is:', JSON.stringify(authResponse.json));
+  .then(function(authResponse) {      
       // Store the tokens securely
       oauth2_token_json = JSON.stringify(authResponse.json, null, 2);
       res.send('Token acquired and stored');
