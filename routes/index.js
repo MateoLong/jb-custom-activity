@@ -25,6 +25,7 @@ router.post('/authUri', (req, res) => {
 
 // Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
 router.get('/callback', function(req, res) {
+  console.log('/callback: ' + req);
   oauthClient
   .createToken(req.url)
   .then(function(authResponse) {
@@ -36,7 +37,7 @@ router.get('/callback', function(req, res) {
   .catch(function(e) {
       console.error('The error message is:', e.originalMessage);
       console.error(e.intuit_tid);
-      res.send('Failed to acquire token: ' + e.originalMessage + ' ' + e.intuit_tid);
+      res.send('Failed to acquire token: ' + e);
   });
 });
 
