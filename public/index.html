@@ -94,7 +94,6 @@
 
                 function getCustomerInfo() {
 
-                    // Generate the authUri
                     $.get('/getCompanyInfo', function (response) {
                         $("#getCompanyInfo").html(JSON.stringify(response, null, 4));
                     });
@@ -102,7 +101,6 @@
 
                 function createCustomer() {
 
-                    // Generate the authUri
                     $.post('/createCustomer', function (response) {
                         $("#createCustomer").html(JSON.stringify(response, null, 4));
                     });

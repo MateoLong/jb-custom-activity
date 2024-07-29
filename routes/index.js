@@ -80,6 +80,7 @@ router.get('/getCompanyInfo', function (req, res) {
 });
 
 router.post('/createCustomer', function (req, res) {
+  console.log('entra al createCustomer');
   const companyID = oauthClient.getToken().realmId;
 
   const url =
