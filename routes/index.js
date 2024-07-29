@@ -2,23 +2,25 @@ var express = require('express');
 var router = express.Router();
 var OAuthClient = require('intuit-oauth');
 
-const oauthClient = new OAuthClient({
-  clientId: process.env.QUICKBOOKS_CLIENT_ID,
-  clientSecret: process.env.QUICKBOOKS_CLIENT_SECRET,
-  environment: 'sandbox',
-  redirectUri: process.env.QUICKBOOKS_REDIRECT_URI
-});
-
 let oauth2_token_json = null;
 let redirectUri = '';
+let oauthClient = null;
 
 // Endpoint to start the OAuth flow
-router.get('/authUri', function(req, res) {
-  var authUri = oauthClient.authorizeUri({
-      scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
-      state: 'testState'
+app.post('/authUri', (req, res) => {
+  oauthClient = new OAuthClient({
+      clientId: req.body.clientId,
+      clientSecret: req.body.clientSecret,
+      environment: req.body.environment,
+      redirectUri: req.body.redirectUri
   });
-  res.redirect(authUri);
+
+  const authUri = oauthClient.authorizeUri({
+      scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
+      state: 'testState',
+  });
+
+  res.json({ authUri }); // Send the authorization URL back to the frontend
 });
 
 // Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
