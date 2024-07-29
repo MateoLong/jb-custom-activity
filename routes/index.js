@@ -60,6 +60,25 @@ router.get('/callback', function(req, res) {
   });
 });
 
+router.get('/getCompanyInfo', function (req, res) {
+  const companyID = oauthClient.getToken().realmId;
+
+  const url =
+    oauthClient.environment == 'sandbox'
+      ? OAuthClient.environment.sandbox
+      : OAuthClient.environment.production;
+
+  oauthClient
+    .makeApiCall({ url: `${url}v3/company/${companyID}/companyinfo/${companyID}` })
+    .then(function (authResponse) {
+      console.log(`\n The response for API call is :${JSON.stringify(authResponse.json)}`);
+      res.send(authResponse.json);
+    })
+    .catch(function (e) {
+      console.error(e);
+    });
+});
+
 /* POST to execute */
 router.post('/execute', async function(req, res, next) {
   var inArguments = req.body.inArguments;
