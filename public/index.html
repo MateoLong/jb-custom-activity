@@ -103,6 +103,8 @@
 
                     $.post('/createCustomer', function (response) {
                         $("#createCustomer").html(JSON.stringify(response, null, 4));
+                    }).fail(function(error) {
+                        console.error('Error creating customer:', error);
                     });
                 }
 
