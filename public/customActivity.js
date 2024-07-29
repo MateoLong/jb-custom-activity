@@ -23,12 +23,23 @@ define(['postmonger'], function(Postmonger) {
                clientSecret: clientSecret,
                environment: environment,
                redirectUri: redirectUri
-           }).done(function(response) {
-               // Redirect to the received authorization URL
-               window.location.href = response.authUri;
-           }).fail(function(error) {
-               console.error('Error initiating OAuth:', error);
-           });
+            }).done(function(response) {
+                console.log('Authorization URL:', response.authUri); // Log the received URL
+                // Open the authorization URL in a new window
+                const authWindow = window.open(response.authUri, 'QuickBooksAuth', 'width=800,height=600');
+                
+                // Optional: Poll the window to detect when it's closed
+                const pollTimer = window.setInterval(function() {
+                    if (authWindow.closed !== false) { // !== is required for compatibility with Opera
+                        window.clearInterval(pollTimer);
+                        console.log('Authorization window closed');
+                        // Optional: Trigger some action after the window is closed, e.g., refresh the page
+                        // location.reload();
+                    }
+                }, 100);
+            }).fail(function(error) {
+                console.error('Error initiating OAuth:', error);
+            });
     });
 
     return {
