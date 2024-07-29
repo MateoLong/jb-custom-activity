@@ -21,12 +21,8 @@ define(['postmonger'], function(Postmonger) {
 
         console.log('clickedNext jsonBody: ', jsonBody);
 
-        // Request the authorization URI from the backend and redirect
-        $.get('/authUri', jsonBody, function(response) {
-            // This will redirect the user to the QuickBooks authorization URL
-        }).fail(function(error) {
-            console.error('Error fetching auth URI:', error);
-        });
+        // Redirect to the backend endpoint to initiate OAuth
+        window.location.href = `/authUri?clientId=${jsonBody.clientId}&clientSecret=${jsonBody.clientSecret}&environment=${jsonBody.environment}&redirectUri=${jsonBody.redirectUri}`;
     });
 
     return {
