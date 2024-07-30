@@ -63,6 +63,7 @@ router.get('/getCompanyInfo', function (req, res) {
 });
 
 router.get('/createCustomer', function (req, res) {
+  console.log('oauthClient: ' + oauthClient);
   const companyID = oauthClient.getToken().realmId;
 
   const url =
@@ -88,6 +89,7 @@ router.post('/execute', async function(req, res, next) {
   // var msg = req.body.inArguments.staticValue;  
   // res.status(200).json({ "error": false, "message": msg, "data": null}); 
   console.log('execute!'); 
+  console.log('oauthClient: ' + oauthClient); 
   // Body sample from API explorer examples
   const body = {
     TrackQtyOnHand: true,
@@ -108,6 +110,8 @@ router.post('/execute', async function(req, res, next) {
       value: '80',
     },
   };
+
+  const companyID = oauthClient.getToken().realmId;
 
   const url =
   oauthClient.environment == 'sandbox'
