@@ -88,21 +88,43 @@ router.post('/execute', async function(req, res, next) {
   // var msg = req.body.inArguments.staticValue;  
   // res.status(200).json({ "error": false, "message": msg, "data": null}); 
   console.log('execute!'); 
-  const companyID = oauthClient.getToken().realmId;
-
-  const url =
-    oauthClient.environment == 'sandbox'
-      ? OAuthClient.environment.sandbox
-      : OAuthClient.environment.production;
+  // Body sample from API explorer examples
+  const body = {
+    TrackQtyOnHand: true,
+    Name: 'Garden Supplies',
+    QtyOnHand: 10,
+    InvStartDate: '2015-01-01',
+    Type: 'Inventory',
+    IncomeAccountRef: {
+      name: 'Sales of Product Income',
+      value: '79',
+    },
+    AssetAccountRef: {
+      name: 'Inventory Asset',
+      value: '81',
+    },
+    ExpenseAccountRef: {
+      name: 'Cost of Goods Sold',
+      value: '80',
+    },
+  };
 
   oauthClient
-    .makeApiCall({ url: `${url}v3/company/${companyID}/companyinfo/${companyID}` })
-    .then(function (authResponse) {
-      console.log(`\n The response for API call is :${JSON.stringify(authResponse.json)}`);
-      res.send(authResponse.json);
+    .makeApiCall({
+      url: `${url}v3/company/${companyID}/customer?minorversion=73}`,
+      method: 'POST',
+      timeout: 0,
+      headers: {
+        "Accept": "application/json",
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+    .then(function (response) {
+      console.log('The API response is  : ' + response);
     })
     .catch(function (e) {
-      console.error(e);
+      console.log('The error is ' + JSON.stringify(e));
     });
 });
 
