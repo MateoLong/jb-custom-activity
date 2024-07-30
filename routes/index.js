@@ -90,70 +90,91 @@ router.post('/execute', async function(req, res, next) {
   console.log('req.body.inArguments: ' + JSON.stringify(inArguments));  
   console.log('execute!'); 
   console.log('oauthClient: ' + JSON.stringify(oauthClient)); 
-  // Body sample from API explorer examples
-  const body = {
-    FullyQualifiedName: "King Groceries", 
-    PrimaryEmailAddr: {
-      Address: "jdrew@myemail.com"
-    }, 
-    DisplayName: "King's Groceries", 
-    Suffix: "Jr", 
-    Title: "Mr", 
-    MiddleName: "B", 
-    Notes: "Here are other details.", 
-    FamilyName: "King", 
-    PrimaryPhone: {
-      FreeFormNumber: "(555) 555-5555"
-    }, 
-    CompanyName: "King Groceries", 
-    BillAddr: {
-      CountrySubDivisionCode: "CA", 
-      City: "Mountain View", 
-      PostalCode: "94042", 
-      Line1: "123 Main Street", 
-      Country: "USA"
-    }, 
-    GivenName: "James"
-  };
 
+  // GET COMPANY INFO
   const companyID = oauthClient.getToken().realmId;
-
+  
   const url =
   oauthClient.environment == 'sandbox'
-    ? OAuthClient.environment.sandbox
-    : OAuthClient.environment.production;
-
+  ? OAuthClient.environment.sandbox
+  : OAuthClient.environment.production;
+  
   console.log('url: ' + url);
-
+  
   oauthClient
-    .makeApiCall({
-      url: `${url}v3/company/${companyID}/customer?minorversion=73`,
-      method: 'POST',
-      timeout: 0,
-      headers: {
-        "Accept": "application/json",
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
-    .then(function (response) {
-      console.log('The API response is  : ' + response);      
-      // res.status(200).json({ "error": false, "message": "customer created" });  
+    .makeApiCall({ url: `${url}v3/company/${companyID}/companyinfo/${companyID}` })
+    .then(function (authResponse) {
+      console.log(`\n The response for API call is :${JSON.stringify(authResponse.json)}`);
+      res.send(authResponse.json);
     })
     .catch(function (e) {
-      console.log('The stringif error is ' + JSON.stringify(e));
-      const errorMessage = e.response ? e.response.data : e.message;
-      console.error('The error is:', JSON.stringify(errorMessage));
-  
-      // Send detailed error response to client
-      res.status(e.response ? e.response.status : 500).json({
-        error: errorMessage,
-        config: e.config,
-        code: e.code,
-        status: e.response ? e.response.status : 500,
-        data: e.response ? e.response.data : undefined
-      })
+      console.error(e);
     });
+  
+  // POST CUSTOMER
+  // const body = {
+  //   FullyQualifiedName: "King Groceries", 
+  //   PrimaryEmailAddr: {
+  //     Address: "jdrew@myemail.com"
+  //   }, 
+  //   DisplayName: "King's Groceries", 
+  //   Suffix: "Jr", 
+  //   Title: "Mr", 
+  //   MiddleName: "B", 
+  //   Notes: "Here are other details.", 
+  //   FamilyName: "King", 
+  //   PrimaryPhone: {
+  //     FreeFormNumber: "(555) 555-5555"
+  //   }, 
+  //   CompanyName: "King Groceries", 
+  //   BillAddr: {
+  //     CountrySubDivisionCode: "CA", 
+  //     City: "Mountain View", 
+  //     PostalCode: "94042", 
+  //     Line1: "123 Main Street", 
+  //     Country: "USA"
+  //   }, 
+  //   GivenName: "James"
+  // };
+
+  // const companyID = oauthClient.getToken().realmId;
+
+  // const url =
+  // oauthClient.environment == 'sandbox'
+  //   ? OAuthClient.environment.sandbox
+  //   : OAuthClient.environment.production;
+
+  // console.log('url: ' + url);
+
+  // oauthClient
+  //   .makeApiCall({
+  //     url: `${url}v3/company/${companyID}/customer?minorversion=73`,
+  //     method: 'POST',
+  //     timeout: 0,
+  //     headers: {
+  //       "Accept": "application/json",
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(body),
+  //   })
+  //   .then(function (response) {
+  //     console.log('The API response is  : ' + response);      
+  //     // res.status(200).json({ "error": false, "message": "customer created" });  
+  //   })
+  //   .catch(function (e) {
+  //     console.log('The stringif error is ' + JSON.stringify(e));
+  //     const errorMessage = e.response ? e.response.data : e.message;
+  //     console.error('The error is:', JSON.stringify(errorMessage));
+  
+  //     // Send detailed error response to client
+  //     res.status(e.response ? e.response.status : 500).json({
+  //       error: errorMessage,
+  //       config: e.config,
+  //       code: e.code,
+  //       status: e.response ? e.response.status : 500,
+  //       data: e.response ? e.response.data : undefined
+  //     })
+  //   });
 });
 
 /* POST to publish */
