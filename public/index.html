@@ -35,11 +35,17 @@
                 </div>
             </div>
             <div class="slds-form-element">
-                <label for="environment">Environment</label>
-                <select id="environment" class="form-control">
-                <option value="sandbox" selected="selected">Sandbox</option>
-                <option value="production">Production</option>
-                </select>
+                <label class="slds-form-element__label" for="select-01">Select Environment</label>
+                <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                        <select class="slds-select" id="environment">
+                            <option value="">Select…</option>
+                            <option>Option One</option>
+                            <option>Option Two</option>
+                            <option>Option Three</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="slds-form-element">
                 <label class="slds-form-element__label" for="redirectUri">Enter Redirect URI</label>
@@ -47,12 +53,13 @@
                     <input type="text" id="redirectUri" class="slds-input" placeholder=""/>
                 </div>
             </div>
+            <pre id="getCompanyInfo"></pre>
             <div class="slds-form-element">       
                 <div class="slds-form-element__control">
                     <button  type="button" id="authorizeUri" class="slds-button slds-button_brand">Connect to QB</button>
                 </div>
             </div>
-            <pre id="getCompanyInfo"></pre>
+            <pre id="getCompanyInfo"></pre>            
             <button  type="button" id="apiCallCompanyInfo" class="slds-button slds-button_brand">Get Company Info</button>
             <pre id="createCustomer"></pre>
             <button  type="button" id="apiCallCreateCustomer" class="slds-button slds-button_brand">Create Customer</button>
