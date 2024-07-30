@@ -20,4 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
+// Get the port from the environment variables (provided by Render)
+const PORT = process.env.PORT || 3000;
+
+// Start the server on 0.0.0.0 with the port from the environment
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 module.exports = app;
