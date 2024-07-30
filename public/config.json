@@ -19,15 +19,6 @@
         "inArguments": [
           {
             "firstName": "{{Contact.Attribute.\"Virtual Office Dev\".FirstName}}"
-          },
-          {
-            "firstNameAttGrp": "{{Contact.Attribute.t3customActivityDE.FirstName}}"
-          },
-          {
-            "contactKey": "{{Contact.Key}}"
-          },
-          {
-            "contactEmail": "{{Contact.Default.Email}}"
           }
         ],
         "outArguments": [],
@@ -68,27 +59,6 @@
           "inArguments": [
             {
               "firstName": {
-                "dataType": "Text",
-                "isNullable": false,
-                "direction": "in"
-              }
-            },
-            {
-              "firstNameAttGrp": {
-                "dataType": "Text",
-                "isNullable": false,
-                "direction": "in"
-              }
-            },
-            {
-              "contactKey": {
-                "dataType": "Text",
-                "isNullable": false,
-                "direction": "in"
-              }
-            },
-            {
-              "contactEmail": {
                 "dataType": "Text",
                 "isNullable": false,
                 "direction": "in"
