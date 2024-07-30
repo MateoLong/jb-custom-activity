@@ -2,6 +2,7 @@
     "workflowApiVersion": "1.1",
     "name": "Custom Activity Name",
     "description": "Custom Activity Description",
+    "key": "53df6720-16fd-43fa-b859-be3d9266008c",
     "metaData": {
       "icon": "images/icon.png",
       "category": "message"
