@@ -145,7 +145,7 @@ router.post('/execute', async function(req, res, next) {
     .catch(function (e) {
       console.log('The stringif error is ' + JSON.stringify(e));
       const errorMessage = e.response ? e.response.data : e.message;
-      console.error('The error is:', errorMessage);
+      console.error('The error is:', JSON.stringify(errorMessage));
   
       // Send detailed error response to client
       res.status(e.response ? e.response.status : 500).json({
