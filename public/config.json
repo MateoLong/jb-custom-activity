@@ -28,7 +28,8 @@
         "url": "https://jb-custom-activity-910s.onrender.com/execute"
       }
     },
-    "configurationArguments": {      
+    "configurationArguments": {   
+      "applicationExtensionKey": "53df6720-16fd-43fa-b859-be3d9266008c",
       "save": {
         "url": "https://jb-custom-activity-910s.onrender.com/save"
       },
