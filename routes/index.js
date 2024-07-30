@@ -139,7 +139,8 @@ router.post('/execute', async function(req, res, next) {
       body: JSON.stringify(body),
     })
     .then(function (response) {
-      console.log('The API response is  : ' + response);
+      console.log('The API response is  : ' + JSON.stringify(response));      
+      res.status(200).json({ "error": false, "message": "customer created", "data": JSON.stringify(response)});  
     })
     .catch(function (e) {
       console.log('The error is ' + JSON.stringify(e));
