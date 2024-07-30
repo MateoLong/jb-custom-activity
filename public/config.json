@@ -43,6 +43,11 @@
         "url": "https://jb-custom-activity-910s.onrender.com/stop"
       }
     },
+    "userInterfaces": {
+      "configModal": {
+        "fullscreen": true      
+      }
+    },
     "schema": {
       "arguments": {
         "execute": {
