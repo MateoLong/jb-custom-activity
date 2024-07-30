@@ -51,7 +51,6 @@
                     <input type="text" id="redirectUri" class="slds-input" placeholder=""/>
                 </div>
             </div>
-            <pre id="getCompanyInfo"></pre>
             <div class="slds-form-element">       
                 <div class="slds-form-element__control">
                     <button  type="button" id="authorizeUri" class="slds-button slds-button_brand">Connect to QB</button>
@@ -108,7 +107,7 @@
 
                 function createCustomer() {
                     console.log('createCustomer() en script');
-                    $.post('/createCustomer', function (response) {
+                    $.get('/createCustomer', function (response) {
                         $("#createCustomer").html(JSON.stringify(response, null, 4));
                     }).fail(function(error) {
                         console.error('Error creating customer:', error);

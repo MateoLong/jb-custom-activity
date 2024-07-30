@@ -62,7 +62,7 @@ router.get('/getCompanyInfo', function (req, res) {
     });
 });
 
-router.post('/createCustomer', function (req, res, next) {
+router.get('/createCustomer', function (req, res, next) {
   console.log('entra al createCustomer');
   const companyID = oauthClient.getToken().realmId;
 
@@ -92,22 +92,22 @@ router.post('/createCustomer', function (req, res, next) {
   },
 };
 
-// oauthClient
-//   .makeApiCall({
-//     url: `${url}v3/company/${companyID}/customer?minorversion=73`,
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(body),
-//   })
-//   .then(function (response) {
-//     console.log('The API response is  : ' + response);
-//     res.json(response);
-//   })
-//   .catch(function (e) {
-//     console.log('The error is ' + JSON.stringify(e));
-//   });
+oauthClient
+  .makeApiCall({
+    url: `${url}v3/company/${companyID}/customer?minorversion=73`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+  .then(function (response) {
+    console.log('The API response is  : ' + response);
+    res.json(response);
+  })
+  .catch(function (e) {
+    console.log('The error is ' + JSON.stringify(e));
+  });
 });
 
 /* POST to execute */
