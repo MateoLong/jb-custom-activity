@@ -109,6 +109,11 @@ router.post('/execute', async function(req, res, next) {
     },
   };
 
+  const url =
+  oauthClient.environment == 'sandbox'
+    ? OAuthClient.environment.sandbox
+    : OAuthClient.environment.production;
+
   oauthClient
     .makeApiCall({
       url: `${url}v3/company/${companyID}/customer?minorversion=73}`,
