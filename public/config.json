@@ -81,14 +81,14 @@
               }
             },
             {
-              "firstName": {
+              "contactKey": {
                 "dataType": "Text",
                 "isNullable": false,
                 "direction": "in"
               }
             },
             {
-              "firstName": {
+              "contactEmail": {
                 "dataType": "Text",
                 "isNullable": false,
                 "direction": "in"
