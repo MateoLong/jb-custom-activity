@@ -61,6 +61,8 @@
             <button  type="button" id="apiCallCompanyInfo" class="slds-button slds-button_brand">Get Company Info</button>
             <pre id="createCustomer"></pre>
             <button  type="button" id="apiCallCreateCustomer" class="slds-button slds-button_brand">Create Customer</button>
+            <pre id="execute"></pre>
+            <button  type="button" id="apiCallExecute" class="slds-button slds-button_brand">Execute</button>
         </div>
         <script type="text/javascript">
             (function() {
@@ -103,13 +105,20 @@
                         $("#getCompanyInfo").html(JSON.stringify(response, null, 4));
                     });
                 }
-
+\
                 function createCustomer() {
                     console.log('createCustomer() en script');
                     $.post('/createCustomer', function (response) {
                         $("#createCustomer").html(JSON.stringify(response, null, 4));
                     }).fail(function(error) {
                         console.error('Error creating customer:', error);
+                    });
+                }
+
+                function execute() {
+
+                    $.get('/execute', function (response) {
+                        $("#execute").html(JSON.stringify(response, null, 4));
                     });
                 }
 
@@ -127,6 +136,11 @@
                 document.getElementById('apiCallCreateCustomer').addEventListener('click', function response(e) {
                     e.preventDefault();
                     createCustomer();
+                });
+
+                document.getElementById('apiCallExecute').addEventListener('click', function response(e) {
+                    e.preventDefault();
+                    execute();
                 });
             })();
         </script>
