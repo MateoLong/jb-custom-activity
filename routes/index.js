@@ -143,7 +143,18 @@ router.post('/execute', async function(req, res, next) {
       // res.status(200).json({ "error": false, "message": "customer created" });  
     })
     .catch(function (e) {
-      console.log('The error is ' + JSON.stringify(e));
+      console.log('The stringif error is ' + JSON.stringify(e));
+      const errorMessage = e.response ? e.response.data : e.message;
+      console.error('The error is:', errorMessage);
+  
+      // Send detailed error response to client
+      res.status(e.response ? e.response.status : 500).json({
+        error: errorMessage,
+        config: e.config,
+        code: e.code,
+        status: e.response ? e.response.status : 500,
+        data: e.response ? e.response.data : undefined
+      })
     });
 });
 
