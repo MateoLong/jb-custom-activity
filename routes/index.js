@@ -94,23 +94,28 @@ router.post('/execute', async function(req, res, next) {
   console.log('oauthClient: ' + JSON.stringify(oauthClient)); 
   // Body sample from API explorer examples
   const body = {
-    TrackQtyOnHand: true,
-    Name: 'Garden Supplies',
-    QtyOnHand: 10,
-    InvStartDate: '2015-01-01',
-    Type: 'Inventory',
-    IncomeAccountRef: {
-      name: 'Sales of Product Income',
-      value: '79',
-    },
-    AssetAccountRef: {
-      name: 'Inventory Asset',
-      value: '81',
-    },
-    ExpenseAccountRef: {
-      name: 'Cost of Goods Sold',
-      value: '80',
-    },
+    FullyQualifiedName: "King Groceries", 
+    PrimaryEmailAddr: {
+      Address: "jdrew@myemail.com"
+    }, 
+    DisplayName: "King's Groceries", 
+    Suffix: "Jr", 
+    Title: "Mr", 
+    MiddleName: "B", 
+    Notes: "Here are other details.", 
+    FamilyName: "King", 
+    PrimaryPhone: {
+      FreeFormNumber: "(555) 555-5555"
+    }, 
+    CompanyName: "King Groceries", 
+    BillAddr: {
+      CountrySubDivisionCode: "CA", 
+      City: "Mountain View", 
+      PostalCode: "94042", 
+      Line1: "123 Main Street", 
+      Country: "USA"
+    }, 
+    GivenName: "James"
   };
 
   const companyID = oauthClient.getToken().realmId;
