@@ -18,7 +18,7 @@
       "execute": {
         "inArguments": [
           {
-            "staticValue": 0
+            "firstName": "{{Contact.Attribute.t3customActivityDE.FirstName}}"
           }
         ],
         "outArguments": [
@@ -62,8 +62,8 @@
         "execute": {
           "inArguments": [
             {
-              "staticValue": {
-                "dataType": "Number",
+              "firstName": {
+                "dataType": "Text",
                 "isNullable": false,
                 "direction": "in"
               }

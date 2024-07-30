@@ -86,10 +86,8 @@ router.get('/createCustomer', function (req, res) {
 
 /* POST to execute */
 router.post('/execute', async function(req, res, next) {
-  // var inArguments = req.body.inArguments;
-  // console.log('req.body.inArguments: ' + req.body.inArguments);
-  // var msg = req.body.inArguments.staticValue;  
-  // res.status(200).json({ "error": false, "message": msg, "data": null}); 
+  var inArguments = req.body.inArguments;
+  console.log('req.body.inArguments: ' + inArguments);  
   console.log('execute!'); 
   console.log('oauthClient: ' + JSON.stringify(oauthClient)); 
   // Body sample from API explorer examples
