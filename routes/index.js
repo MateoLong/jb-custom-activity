@@ -63,14 +63,16 @@ router.get('/getCompanyInfo', function (req, res) {
 });
 
 router.get('/createCustomer', function (req, res) {
-  console.log('oauthClient: ' + oauthClient);
+  console.log('oauthClient: ' + JSON.stringify(oauthClient));
   const companyID = oauthClient.getToken().realmId;
-
+  
   const url =
-    oauthClient.environment == 'sandbox'
-      ? OAuthClient.environment.sandbox
-      : OAuthClient.environment.production;
-
+  oauthClient.environment == 'sandbox'
+  ? OAuthClient.environment.sandbox
+  : OAuthClient.environment.production;
+  
+  console.log('url: ' + url);
+  
   oauthClient
     .makeApiCall({ url: `${url}v3/company/${companyID}/companyinfo/${companyID}` })
     .then(function (authResponse) {
@@ -89,7 +91,7 @@ router.post('/execute', async function(req, res, next) {
   // var msg = req.body.inArguments.staticValue;  
   // res.status(200).json({ "error": false, "message": msg, "data": null}); 
   console.log('execute!'); 
-  console.log('oauthClient: ' + oauthClient); 
+  console.log('oauthClient: ' + JSON.stringify(oauthClient)); 
   // Body sample from API explorer examples
   const body = {
     TrackQtyOnHand: true,
@@ -117,6 +119,8 @@ router.post('/execute', async function(req, res, next) {
   oauthClient.environment == 'sandbox'
     ? OAuthClient.environment.sandbox
     : OAuthClient.environment.production;
+
+  console.log('url: ' + url);
 
   oauthClient
     .makeApiCall({
