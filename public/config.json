@@ -21,11 +21,6 @@
             "firstName": "{{Contact.Attribute.t3customActivityDE.FirstName}}"
           }
         ],
-        "outArguments": [
-          {
-            "returnValue": "default"
-          }
-        ],
         "url": "https://jb-custom-activity-910s.onrender.com/execute"
       }
     },
@@ -66,15 +61,6 @@
                 "dataType": "Text",
                 "isNullable": false,
                 "direction": "in"
-              }
-            }
-          ],
-          "outArguments": [
-            {
-              "returnValue": {
-                "dataType": "Text",
-                "isNullable": false,
-                "direction": "out"
               }
             }
           ]
