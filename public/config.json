@@ -10,7 +10,7 @@
     "type": "REST",
     "lang": {
       "en-US": {
-        "name": "Primer Test Custom Activity",
+        "name": "Create QuickBooks Customer",
         "description": "Primer test de custom activity"
       }
     },
