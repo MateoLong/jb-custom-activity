@@ -18,7 +18,10 @@
       "execute": {
         "inArguments": [
           {
-            "firstName": "{{Contact.Attribute.t3customActivityDE.FirstName}}"
+            "firstName": "{{Contact.Attribute.\"Virtual Office Dev\".FirstName}}"
+          },
+          {
+            "firstNameAttGrp": "{{Contact.Attribute.t3customActivityDE.FirstName}}"
           },
           {
             "contactKey": "{{Contact.Key}}"
