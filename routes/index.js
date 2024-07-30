@@ -120,7 +120,7 @@ router.post('/execute', async function(req, res, next) {
 
   oauthClient
     .makeApiCall({
-      url: `${url}v3/company/${companyID}/customer?minorversion=73}`,
+      url: `${url}v3/company/${companyID}/customer?minorversion=73`,
       method: 'POST',
       timeout: 0,
       headers: {
