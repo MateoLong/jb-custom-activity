@@ -11,23 +11,6 @@ let oauthClient = null;
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// Endpoint to start the OAuth flow
-// router.post('/authUri', (req, res) => {
-//   oauthClient = new OAuthClient({
-//       clientId: req.body.clientId,
-//       clientSecret: req.body.clientSecret,
-//       environment: req.body.environment,
-//       redirectUri: req.body.redirectUri
-//   });
-
-//   const authUri = oauthClient.authorizeUri({
-//       scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
-//       state: 'testState',
-//   });
-
-//   res.json({ authUri }); // Send the authorization URL back to the frontend
-// });
-
 router.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
     clientId: req.query.json.clientId,
@@ -81,33 +64,33 @@ router.get('/getCompanyInfo', function (req, res) {
 
 router.post('/createCustomer', function (req, res, next) {
   console.log('entra al createCustomer');
-//   const companyID = oauthClient.getToken().realmId;
+  const companyID = oauthClient.getToken().realmId;
 
-//   const url =
-//     oauthClient.environment == 'sandbox'
-//       ? OAuthClient.environment.sandbox
-//       : OAuthClient.environment.production;
+  const url =
+    oauthClient.environment == 'sandbox'
+      ? OAuthClient.environment.sandbox
+      : OAuthClient.environment.production;
 
-//   // Body sample from API explorer examples
-//   const body = {
-//   TrackQtyOnHand: true,
-//   Name: 'Garden Supplies',
-//   QtyOnHand: 10,
-//   InvStartDate: '2015-01-01',
-//   Type: 'Inventory',
-//   IncomeAccountRef: {
-//     name: 'Sales of Product Income',
-//     value: '79',
-//   },
-//   AssetAccountRef: {
-//     name: 'Inventory Asset',
-//     value: '81',
-//   },
-//   ExpenseAccountRef: {
-//     name: 'Cost of Goods Sold',
-//     value: '80',
-//   },
-// };
+  // Body sample from API explorer examples
+  const body = {
+  TrackQtyOnHand: true,
+  Name: 'Garden Supplies',
+  QtyOnHand: 10,
+  InvStartDate: '2015-01-01',
+  Type: 'Inventory',
+  IncomeAccountRef: {
+    name: 'Sales of Product Income',
+    value: '79',
+  },
+  AssetAccountRef: {
+    name: 'Inventory Asset',
+    value: '81',
+  },
+  ExpenseAccountRef: {
+    name: 'Cost of Goods Sold',
+    value: '80',
+  },
+};
 
 // oauthClient
 //   .makeApiCall({
