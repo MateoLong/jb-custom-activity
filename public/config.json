@@ -19,8 +19,15 @@
         "inArguments": [
           {
             "firstName": "{{Contact.Attribute.t3customActivityDE.FirstName}}"
+          },
+          {
+            "contactKey": "{{Contact.Key}}"
+          },
+          {
+            "contactEmail": "{{Contact.Default.Email}}"
           }
         ],
+        "outArguments": [],
         "url": "https://jb-custom-activity-910s.onrender.com/execute"
       }
     },
@@ -63,7 +70,8 @@
                 "direction": "in"
               }
             }
-          ]
+          ],
+          "outArguments": []
         }
       }
     }
