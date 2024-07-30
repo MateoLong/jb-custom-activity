@@ -81,8 +81,6 @@ router.get('/createCustomer', function (req, res) {
     });
 });
 
-
-
 /* POST to execute */
 router.post('/execute', async function(req, res, next) {
   // var inArguments = req.body.inArguments;
@@ -118,13 +116,13 @@ router.post('/validate', async function(req, res, next) {
   res.status(200).json({ "success": true });  
 });
 
-/* POST to validate */
+/* POST to save */
 router.post('/save', async function(req, res, next) {
   res.status(200).json({ "success": true });  
 });
 
-/* POST to validate */
-router.post('/save', async function(req, res, next) {
+/* POST to stop */
+router.post('/stop', async function(req, res, next) {
   res.status(200).json({ "success": true });  
 });
 
