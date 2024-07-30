@@ -25,12 +25,21 @@
             "returnValue": "default"
           }
         ],
-        "url": "https://job-custom-act.onrender.com/execute"
+        "url": "https://jb-custom-activity-910s.onrender.com/execute"
       }
     },
     "configurationArguments": {      
+      "save": {
+        "url": "https://jb-custom-activity-910s.onrender.com/save"
+      },
       "publish": {
-        "url": "https://job-custom-act.onrender.com/publish"
+        "url": "https://jb-custom-activity-910s.onrender.com/publish"
+      },
+      "validate": {
+        "url": "https://jb-custom-activity-910s.onrender.com/validate"
+      },
+      "stop": {
+        "url": "https://jb-custom-activity-910s.onrender.com/stop"
       }
     },
     "schema": {

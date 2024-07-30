@@ -113,4 +113,19 @@ router.post('/publish', async function(req, res, next) {
   res.status(200).json({ "error": false, "message": "publish success", "data": null});  
 });
 
+/* POST to validate */
+router.post('/validate', async function(req, res, next) {
+  res.status(200).json({ "success": true });  
+});
+
+/* POST to validate */
+router.post('/save', async function(req, res, next) {
+  res.status(200).json({ "success": true });  
+});
+
+/* POST to validate */
+router.post('/save', async function(req, res, next) {
+  res.status(200).json({ "success": true });  
+});
+
 module.exports = router;
