@@ -72,6 +72,27 @@
                 "isNullable": false,
                 "direction": "in"
               }
+            },
+            {
+              "firstNameAttGrp": {
+                "dataType": "Text",
+                "isNullable": false,
+                "direction": "in"
+              }
+            },
+            {
+              "firstName": {
+                "dataType": "Text",
+                "isNullable": false,
+                "direction": "in"
+              }
+            },
+            {
+              "firstName": {
+                "dataType": "Text",
+                "isNullable": false,
+                "direction": "in"
+              }
             }
           ],
           "outArguments": []
