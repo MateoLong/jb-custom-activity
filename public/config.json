@@ -32,16 +32,24 @@
     "configurationArguments": {   
       "applicationExtensionKey": "53df6720-16fd-43fa-b859-be3d9266008c",
       "save": {
-        "url": "https://jb-custom-activity-910s.onrender.com/save"
+        "url": "https://jb-custom-activity-910s.onrender.com/save",
+        "verb": "POST",
+        "useJwt": false
       },
       "publish": {
-        "url": "https://jb-custom-activity-910s.onrender.com/publish"
+        "url": "https://jb-custom-activity-910s.onrender.com/publish",
+        "verb": "POST",
+        "useJwt": false
       },
       "validate": {
-        "url": "https://jb-custom-activity-910s.onrender.com/validate"
+        "url": "https://jb-custom-activity-910s.onrender.com/validate",
+        "verb": "POST",
+        "useJwt": false
       },
       "stop": {
-        "url": "https://jb-custom-activity-910s.onrender.com/stop"
+        "url": "https://jb-custom-activity-910s.onrender.com/stop",
+        "verb": "POST",
+        "useJwt": false
       }
     },
     "userInterfaces": {
