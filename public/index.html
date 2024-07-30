@@ -105,7 +105,7 @@
                         $("#getCompanyInfo").html(JSON.stringify(response, null, 4));
                     });
                 }
-                
+
                 function createCustomer() {
                     console.log('createCustomer() en script');
                     $.post('/createCustomer', function (response) {
@@ -117,7 +117,7 @@
 
                 function execute() {
 
-                    $.get('/execute', function (response) {
+                    $.post('/execute', function (response) {
                         $("#execute").html(JSON.stringify(response, null, 4));
                     });
                 }
