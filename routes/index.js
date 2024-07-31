@@ -88,7 +88,7 @@ router.get('/createCustomer', function (req, res) {
 router.post('/execute', async function(req, res, next) {
   var inArguments = req.body.inArguments;
   console.log('inArguments: ' + JSON.stringify(inArguments));  
-  var firstName = inArguments.firstName;
+  var firstName = inArguments[0].firstName;
   console.log('inArguments firstName: ' + JSON.stringify(firstName));  
   
   // POST CUSTOMER
