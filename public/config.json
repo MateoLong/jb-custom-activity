@@ -19,6 +19,9 @@
         "inArguments": [
           {
             "firstName": "{{Contact.Attribute.\"Virtual Office Dev\".FirstName}}"
+          },
+          {
+            "lastName": "{{Contact.Attribute.\"Virtual Office Dev\".LastName}}"
           }
         ],
         "outArguments": [],
@@ -59,6 +62,13 @@
           "inArguments": [
             {
               "firstName": {
+                "dataType": "Text",
+                "isNullable": false,
+                "direction": "in"
+              }
+            },
+            {
+              "lastName": {
                 "dataType": "Text",
                 "isNullable": false,
                 "direction": "in"

@@ -89,11 +89,13 @@ router.post('/execute', async function(req, res, next) {
   var inArguments = req.body.inArguments;
   console.log('inArguments: ' + JSON.stringify(inArguments));  
   var firstName = inArguments[0].firstName;
-  console.log('inArguments firstName: ' + JSON.stringify(firstName));  
+  var firstName = inArguments[0].lastName;
+  var fullName = firstName + ' ' + lastName;
+  console.log('inArguments fullName: ' + JSON.stringify(fullName));  
   
   // POST CUSTOMER
   const body = {    
-    DisplayName: firstName     
+    DisplayName: fullName 
   };
 
   const companyID = oauthClient.getToken().realmId;
