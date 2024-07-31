@@ -57,12 +57,6 @@
                     <button  type="button" id="authorizeUri" class="slds-button slds-button_brand">Connect to QB</button>
                 </div>
             </div>
-            <pre id="getCompanyInfo"></pre>            
-            <button  type="button" id="apiCallCompanyInfo" class="slds-button slds-button_brand">Get Company Info</button>
-            <pre id="createCustomer"></pre>
-            <button  type="button" id="apiCallCreateCustomer" class="slds-button slds-button_brand">Create Customer</button>
-            <pre id="execute"></pre>
-            <button  type="button" id="apiCallExecute" class="slds-button slds-button_brand">Execute</button>
         </div>
         <script type="text/javascript">
             (function() {
@@ -125,22 +119,6 @@
                 document.getElementById('authorizeUri').addEventListener('click', function response(e) {
                     e.preventDefault();
                     authorizeUri();
-                });
-
-
-                document.getElementById('apiCallCompanyInfo').addEventListener('click', function response(e) {
-                    e.preventDefault();
-                    getCustomerInfo();
-                });
-
-                document.getElementById('apiCallCreateCustomer').addEventListener('click', function response(e) {
-                    e.preventDefault();
-                    createCustomer();
-                });
-
-                document.getElementById('apiCallExecute').addEventListener('click', function response(e) {
-                    e.preventDefault();
-                    execute();
                 });
             })();
         </script>
